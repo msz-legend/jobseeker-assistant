@@ -1,0 +1,77 @@
+# --- Personal data: everything below must NEVER enter the repository ---
+# 任何一条放进版本库都等于把你的求职隐私公开发布。公开 / 分享前先自查 git status。
+
+salary_data.json
+
+# scrape 状态文件（路径与 skill 目录相关，用 ** 确保任意深度都在规则内）
+**/job_scraper/seen_jobs.json
+**/job_scraper/notion_sync.json
+**/job_scraper/*.md
+
+# 个人文档类
+*_BehavioralReport.pdf
+profile_export.pdf
+
+# /apply 输出的定向简历与中间产物（含姓名/联系方式/薪资 history）
+cv/main_*.*
+cv/*.txt
+!cv/main_example.*
+
+# documents/：用户放入的原始材料（简历、导出、证书、JD 档案、投递记录）
+documents/cv/**
+documents/profiles/**
+documents/diplomas/**
+documents/references/**
+documents/projects/**
+documents/applications/**
+documents/postings/**
+documents/inbound/**
+documents/_inbox_manifest.json
+documents/interview/**
+
+# 求职追踪表（含公司、HR 姓名、评分，敏感度最高）
+job_search_tracker.csv
+
+# 输出与缓存
+reports/
+upskill/*.md
+**/upskill/report-*.md
+company_research/*.json
+
+# /add-portal 生成的技能可能要求从环境变量读取付费抓取服务的 token
+.env
+.env.*
+
+# 机器本地配置与临时放行授权
+.claude/settings.local.json
+
+# --- negations：允许进库的例外 ---
+!documents/**/.gitkeep
+!documents/inbound/
+!documents/inbound/*/
+!documents/inbound/*/README.md
+!documents/inbound/**/.gitkeep
+!documents/applications/
+!documents/applications/README.md
+!documents/README.md
+!documents/postings/README.md
+!documents/postings/_TEMPLATE.md
+
+# --- 通用 ---
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+# Merged personal job-search workspace (local only)
+documents/overview/**
+
+# 个人档案（/setup 填充真实姓名/手机/邮箱/薪资后即为个人材料，永不入库）
+.claude/skills/job-application-assistant/01-candidate-profile.md
+.claude/skills/job-application-assistant/02-behavioral-profile.md
+USER_DIR_MAP.md
+# 会话交接与本地工作笔记不入库
+HANDOFF_*.md
+documents/HANDOFF_*.md
+
+# 注：CLAUDE.md 已改为零个人信息的转发页（@AGENTS.md 导入），不再忽略

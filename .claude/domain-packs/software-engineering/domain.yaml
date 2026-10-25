@@ -1,0 +1,9 @@
+name: software-engineering
+version: 1.0.0
+extends: generic
+selection:
+  signals: [software, engineering, developer, backend, frontend, platform, data]
+question_sections:
+  - evidence_verification
+  - capability_expansion
+  - transfer_scenarios

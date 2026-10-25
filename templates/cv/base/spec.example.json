@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "output": "cv/main_[公司]_[岗位].docx",
+    "pages_target": 1
+  },
+  "identity": {
+    "name": "[YOUR_NAME]",
+    "contact": "[YOUR_PHONE] | [YOUR_EMAIL] | [YOUR_CITY]",
+    "lines": [
+      "GitHub: [YOUR_GITHUB_URL]",
+      "博客/作品集: [YOUR_PORTFOLIO_URL]"
+    ]
+  },
+  "objective": {
+    "label": "求职意向",
+    "role": "[YOUR_TARGET_ROLE]",
+    "city": "[YOUR_TARGET_CITY]",
+    "availability": "[AVAILABILITY]"
+  },
+  "sections": [
+    {
+      "title": "专业技能",
+      "type": "bullets",
+      "items": [
+        "[主语言]：[一句话水平边界，写你能被追问三层的东西]",
+        "[第二语言/中间件]：[同上]",
+        "[数据库]：[常规配置/调优/容灾经验]"
+      ]
+    },
+    {
+      "title": "工作经历",
+      "type": "experience",
+      "items": [
+        {
+          "header": "[公司名] · [职位]",
+          "meta": "[2020.07 – 至今] | [城市]",
+          "bullets": [
+            "[做了什么]：[方法/方案]，[结果带数字：QPS/延迟/成本/可用率]"
+          ],
+          "note": "每条 = 动作 + 量化结果；没有数字就写业务影响或对比"
+        },
+        {
+          "header": "[上一家公司] · [职位]",
+          "meta": "[2018.04 – 2020.06] | [城市]",
+          "bullets": [
+            "[同样规则，避免岗位描述式句子]"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "项目经历",
+      "type": "projects",
+      "items": [
+        {
+          "header": "[项目名]",
+          "meta": "[2022.01 – 2022.12]",
+          "bullets": [
+            "[角色与规模]：[架构/难点]，[结果]"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "教育经历",
+      "type": "simple",
+      "items": [
+        "[学校] · [专业] · [学历] | [2014-2018]"
+      ]
+    },
+    {
+      "title": "证书与奖项",
+      "type": "simple",
+      "items": [
+        "[仅在真实获奖或证书时保留本节]"
+      ]
+    }
+  ]
+}

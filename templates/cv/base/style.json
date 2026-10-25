@@ -1,0 +1,17 @@
+{
+  "name_font": "微软雅黑",
+  "head_font": "微软雅黑",
+  "body_font": "宋体",
+  "name_size": 18.0,
+  "head_size": 12.0,
+  "subhead_size": 11.0,
+  "body_size": 10.5,
+  "small_size": 9.0,
+  "margins_cm": [1.6, 1.5, 1.6, 1.5],
+  "page_cm": [21.0, 29.7],
+  "head_space_before_pt": 8.0,
+  "head_space_after_pt": 2.0,
+  "bullet_space_after_pt": 1.5,
+  "item_space_after_pt": 4.0,
+  "accent_color": "404040"
+}

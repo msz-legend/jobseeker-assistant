@@ -1,0 +1,7 @@
+name: generic
+version: 1.0.0
+description: Domain-neutral prompts for evidence, capability, and transfer questions.
+question_sections:
+  - evidence_verification
+  - capability_expansion
+  - transfer_scenarios
