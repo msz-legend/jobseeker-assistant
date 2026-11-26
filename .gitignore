@@ -32,6 +32,9 @@ documents/interview/**
 # 求职追踪表（含公司、HR 姓名、评分，敏感度最高）
 job_search_tracker.csv
 
+# 对话简历受控投递：审核队列/台账/风控现场（含 HR 姓名与公司，个人隐私）
+documents/dispatch/**
+
 # 输出与缓存
 reports/
 upskill/*.md

@@ -44,6 +44,39 @@
 
 ---
 
+## 受控自动投递（Android 真机，可选）
+
+除检索、评估和材料生成外，仓库还提供一个面向 BOSS 直聘的**受控会话投递**工具：
+当招聘者在聊天里明确索要简历时，按规则筛选后发送对应版本的简历，并紧跟一条补充文案。
+它不会绕过登录、验证码或平台风控；命中风险信号立即停止并保留现场。
+
+- **设备**：Android 真机开启 USB 调试，`adb` 可用；首次发送中文补充文案时会自动安装并临时启用 ADBKeyboard。
+- **范围**：当前只处理 BOSS 直聘「消息 → 全部」；猎聘列表为自绘 UI，暂不纳入自动扫描。
+- **索要判定**：平台卡片（含「同意/拒绝」）或文本索要任一命中即可；两者都未命中则不发送、不回复。命中来源写入 `request_source`（`card` / `text` / `card+text`）。
+- **四层过滤**：明确索要、非外包/猎头、北京、非算法岗；另加近一周时间窗口和单次发送上限。
+- **简历版本**：语言只决定发哪份简历——Java → JAVA-Agent，Go / Python → GO-Agent，未明确语言默认 GO-Agent；语言不再作为硬性门槛。
+- **人工审核门**：`send` 只处理 `approved: true` 且已核实、通过过滤、属于近一周的条目；`run` 是定时任务单一入口，按用户授权逐会话打开、当场判定并发送，扫描结束后只生成审计报告，不再批量补发。
+- **补充文案**：简历确认后发送 `documents/dispatch/followup_message.txt` 中的既定文案；若文案漏发，可用 `followup` 子命令只补文案、不重发简历。
+
+常用命令：
+
+```bash
+python tools/chat_resume_dispatch.py list --dump <ui-dump.xml>
+python tools/chat_resume_dispatch.py verify --queue <queue.json>
+python tools/chat_resume_dispatch.py rescreen --evidence <details.jsonl> --out <queue.json>
+python tools/chat_resume_dispatch.py recent --queue <queue.json> --dump-dir <list_dumps>
+python tools/chat_resume_dispatch.py send --yes-i-reviewed --auto-open
+python tools/chat_resume_dispatch.py run --out-dir documents/dispatch/evidence/verify/run_<timestamp> --days 7
+python tools/chat_resume_dispatch.py followup --ledger <ledger.jsonl> --yes-i-reviewed
+```
+
+规则和语言阶梯在 [config/resume_ladder.json](config/resume_ladder.json)；完整设计与安全边界见
+[docs/superpowers/specs/2026-11-23-chat-resume-dispatch-design.md](docs/superpowers/specs/2026-11-23-chat-resume-dispatch-design.md)，
+命令剧本见 [.claude/commands/dispatch-resume.md](.claude/commands/dispatch-resume.md)。审核队列、台账、截图和
+个人简历名映射都位于 gitignore 的 `documents/dispatch/**`，不会进入公开仓库。
+
+---
+
 ## 快速开始
 
 前置条件：Python 3.10+（Windows 用 `python`）以及能读取 `AGENTS.md` 的 AI 代理。可选依赖和初始化步骤见 [SETUP.md](SETUP.md)。
@@ -75,6 +108,7 @@ python tools/lint_skills.py
 python tools/security_guards.py
 python tools/check_framework_version.py
 python -m unittest discover -s tests -p 'test_*.py'
+python -m unittest tests.test_chat_resume_dispatch tests.test_chat_resume_screening
 ```
 
 ## 使用约定
@@ -97,11 +131,13 @@ python -m unittest discover -s tests -p 'test_*.py'
 ├── CLAUDE.md                 # Claude Code 转发页（@AGENTS.md 导入，零个人信息）
 ├── job_search_tracker.csv    # 追踪表（仅表头 + 1 行占位示例；已 gitignore）
 ├── .claude/
-│   ├── commands/             # /setup /intake /apply /mock /interview /outcome …
+│   ├── commands/             # /setup /intake /apply /dispatch-resume /mock /interview /outcome …
 │   ├── skills/               # 方法论和可复用模板
 │   ├── domain-packs/         # generic + 可插拔职业领域包
 │   ├── agents/               # 只读的岗位抓取、评分和审查代理
 │   └── settings.json         # 权限白名单
+├── config/
+│   └── resume_ladder.json    # 会话投递：四层过滤、语言→简历阶梯、扫描屏数
 ├── .agents/skills/           # 门户搜索技能（linkedin-search 出厂；/add-portal 可增）
 ├── documents/
 │   ├── inbound/              # materials/ 与 jd-batch/，原文件不移动

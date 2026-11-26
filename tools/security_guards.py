@@ -91,6 +91,12 @@ ALLOWED_PERMISSIONS = {
     # Reads a file or stdin, writes only to an explicit --out, never fetches.
     "Bash(python tools/posting_guard.py:*)",
     "Bash(python3 tools/posting_guard.py:*)",
+    # Controlled resume dispatch: stdlib + adb, reads UI tree and acts only on
+    # human-approved items. Scope is the named script, not bare python/bash.
+    "Bash(python tools/chat_resume_dispatch.py:*)",
+    "Bash(python3 tools/chat_resume_dispatch.py:*)",
+    "Bash(python tools/chat_resume_ladder.py:*)",
+    "Bash(python3 tools/chat_resume_ladder.py:*)",
 }
 
 # Rules that must stay in .claude/settings.json permissions.ask. An ask rule
@@ -167,6 +173,8 @@ REQUIRED_IGNORE_RULES = [
     "documents/projects/**",
     "documents/applications/**",
     "documents/postings/**",
+    # Controlled resume dispatch queue/ledger/evidence (HR names, companies).
+    "documents/dispatch/**",
     # Belt-and-braces, not the primary guard: nothing writes here.
     # /interview's prep packs land under documents/applications/**, above.
     "documents/interview/**",
@@ -247,6 +255,10 @@ ALLOWED_SKILL_TOOLS = {
     "Bash(bun --version)",
     "Bash(python tools/job_key.py:*)",
     "Bash(python3 tools/job_key.py:*)",
+    "Bash(python tools/chat_resume_dispatch.py:*)",
+    "Bash(python3 tools/chat_resume_dispatch.py:*)",
+    "Bash(python tools/chat_resume_ladder.py:*)",
+    "Bash(python3 tools/chat_resume_ladder.py:*)",
     "Bash(python tools/scrape_state.py:*)",
     "Bash(python3 tools/scrape_state.py:*)",
 }

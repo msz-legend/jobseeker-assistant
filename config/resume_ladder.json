@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "description": "Ordered language-stack ladder used only to choose a resume version: Java > Go > Python; a conversation stating none of them uses the fallback resume and is not filtered out. Resume values are placeholder keys resolved via documents/dispatch/resume_names.json (gitignored).",
+  "rules": [
+    {
+      "id": "java",
+      "patterns": ["java", "spring", "jvm", "JAVA"],
+      "resume": "%JAVA_RESUME%"
+    },
+    {
+      "id": "go",
+      "patterns": ["golang", "\\bgo\\b", "go后端", "Go"],
+      "resume": "%GO_RESUME%"
+    },
+    {
+      "id": "python",
+      "patterns": ["\\bpython\\b", "\\bpython3\\b", "python后端"],
+      "resume": "%GO_RESUME%"
+    }
+  ],
+  "fallback": {
+    "id": "default",
+    "resume": "%GO_RESUME%",
+    "note": "Used by pick_resume() when no language stack is stated; language is never a hard filter (user rule 2026-11-26: no stack → GO resume)."
+  },
+  "resume_request_patterns": [
+    "发.{0,4}简历",
+    "简历.{0,4}发我",
+    "方便.{0,8}简历",
+    "简历.{0,4}看一下",
+    "看一下.{0,8}简历",
+    "简历.{0,4}评估",
+    "把简历.{0,4}发",
+    "发一份.{0,4}简历"
+  ],
+  "resume_request_negative_patterns": [
+    "已发.{0,6}简历",
+    "发过.{0,6}简历",
+    "已经.{0,8}简历",
+    "收到.{0,6}简历",
+    "简历.{0,4}已收到",
+    "看过.{0,6}简历",
+    "简历.{0,8}发给业务",
+    "感谢投递"
+  ],
+  "resume_request_terminal_negative_patterns": [
+    "请求中",
+    "附件简历请求已发送",
+    "已发送给Boss",
+    "对方已同意",
+    "简历[^\\n]{0,100}已发送",
+    "附件简历[^\\n]{0,40}已发送"
+  ],
+  "resume_request_ignore_patterns": [
+    "^发简历$",
+    "^附件简历$",
+    "^点击查看附件$",
+    "^点击预览附件简历$",
+    "^换电话$",
+    "^换微信$",
+    "^不感兴趣$",
+    "^查看详细分析$",
+    "^已读$",
+    "^同意$",
+    "^拒绝$"
+  ],
+  "resume_request_self_patterns": [
+    "我的简历",
+    "本人的简历",
+    "本人简历"
+  ],
+  "explicit_request_patterns": [
+    "索要.{0,8}简历",
+    "要.{0,2}份.{0,6}简历",
+    "发.{0,2}份.{0,6}简历",
+    "简历.{0,4}发(我|来|份)",
+    "附件简历.{0,8}(同意|发|给|吗)",
+    "想要.{0,8}简历",
+    "把.{0,2}简历.{0,4}发",
+    "提供.{0,12}简历",
+    "同步.{0,12}简历",
+    "给(我|您).{0,8}简历",
+    "获得.{0,10}简历",
+    "获取.{0,10}简历",
+    "投递.{0,10}简历",
+    "辛苦.{0,8}简历",
+    "简历.{0,8}发(一下|一个|过来|给我|给您|给)",
+    "简历.{0,8}(发一下|发一个)"
+  ],
+  "explicit_request_require_label": true,
+  "resume_request_card_patterns": [
+    "我想要一份您的?附件简历",
+    "我想要一份你的?附件简历",
+    "想要一份您的?附件简历",
+    "想要一份你的?附件简历"
+  ],
+  "resume_request_card_buttons": ["同意", "拒绝"],
+  "resume_request_card_quote_patterns": [
+    "我想要一份您的?附件简历.{0,8}是否同意",
+    "我想要一份你的?附件简历.{0,8}是否同意",
+    "想要一份您的?附件简历.{0,8}是否同意",
+    "想要一份你的?附件简历.{0,8}是否同意"
+  ],
+  "outsourcing_patterns": [
+    "猎头",
+    "外包",
+    "人力",
+    "人才",
+    "咨询",
+    "顾问",
+    "德科",
+    "外服",
+    "hrm",
+    "招聘经理",
+    "招聘主管",
+    "rpo",
+    "劳务派遣"
+  ],
+  "outsourcing_project_patterns": ["字节\\s*OD", "OD\\s*项目", "OD\\s*形式"],
+  "non_beijing_patterns": [
+    "上海", "天津", "重庆", "河北", "山西", "辽宁", "吉林", "黑龙江",
+    "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南",
+    "广东", "海南", "四川", "贵州", "云南", "陕西", "甘肃", "青海", "台湾",
+    "内蒙古", "广西", "西藏", "宁夏", "新疆", "香港", "澳门", "海外",
+    "青岛", "深圳", "杭州", "广州", "南京", "苏州", "成都", "武汉", "西安",
+    "宁波", "厦门", "长沙", "郑州", "济南", "合肥", "福州", "大连", "沈阳",
+    "无锡", "东莞", "佛山", "珠海", "昆明", "天津", "太原", "石家庄"
+  ],
+  "non_local_role_patterns": [
+    "算法", "算法工程师", "模型训练", "机器学习算法", "深度学习算法", "NLP算法", "CV算法"
+  ],
+  "local_city": "北京",
+  "scan": {
+    "max_screens": 5,
+    "note": "Maximum BOSS 全部-list screens scanned by `run` when --max-screens is not supplied (user rule 2026-11-25: only the first five screens). Reaching the limit is incomplete, not a successful full scan."
+  }
+}

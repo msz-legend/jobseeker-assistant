@@ -28,7 +28,11 @@
       "Bash(python tools/posting_guard.py:*)",
       "Bash(python3 tools/posting_guard.py:*)",
       "Bash(python tools/page_decode.py:*)",
-      "Bash(python3 tools/page_decode.py:*)"
+      "Bash(python3 tools/page_decode.py:*)",
+      "Bash(python tools/chat_resume_dispatch.py:*)",
+      "Bash(python3 tools/chat_resume_dispatch.py:*)",
+      "Bash(python tools/chat_resume_ladder.py:*)",
+      "Bash(python3 tools/chat_resume_ladder.py:*)"
     ],
     "ask": [
       "Edit(.claude/settings.json)",
